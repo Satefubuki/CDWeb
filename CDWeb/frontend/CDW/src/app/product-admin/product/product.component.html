@@ -1,0 +1,9 @@
+<p>product works!</p>
+{{user}}
+<input type="file" (change)="selectFile($event)" />
+<input type="file" (change)="selectFile2($event)" />
+<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+    Upload
+  </button>
+
+  <img src="http://localhost:8081/files/Penguins.jpg" alt="">

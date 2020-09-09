@@ -1,0 +1,47 @@
+<body class="igx-typography igx-scrollbar">
+  
+<div class="content-wrap" igxLayout>
+  <igx-nav-drawer id="navigation" [pin]="true" [pinThreshold]="0">
+    <ng-template igxDrawer>
+        <span igxDrawerItem [active]="Product" routerLink="/admin" igxRipple>
+          <igx-icon fontSet="material">laptop_mac</igx-icon>
+          <span>Product</span>
+        </span>
+        <span igxDrawerItem [active]="User" routerLink="/admin/user" igxRipple >
+          <igx-icon fontSet="material">person</igx-icon>
+          <span>User</span>
+        </span>
+        <span igxDrawerItem [active]="Order" routerLink="/admin/order" igxRipple >
+          <igx-icon fontSet="material">group_work</igx-icon>
+          <span>Order</span>
+        </span>
+        <span igxDrawerItem [active]="Log" routerLink="/admin/log" igxRipple >
+          <igx-icon fontSet="material">bluetooth</igx-icon>
+          <span>Log</span>
+        </span>
+    </ng-template>
+    <ng-template igxDrawerMini>
+      <span igxDrawerItem [active]="Product" routerLink="/admin" igxRipple>
+        <igx-icon fontSet="material"  color="blue">laptop_mac</igx-icon>
+      </span>
+      <span igxDrawerItem [active]="User" routerLink="/admin/user" igxRipple >
+        <igx-icon fontSet="material">person</igx-icon>
+      </span>
+      <span igxDrawerItem [active]="Order" routerLink="/admin/order" igxRipple >
+        <igx-icon fontSet="material">group_work</igx-icon>
+      </span>
+      <span igxDrawerItem [active]="Log" routerLink="/admin/log" igxRipple >
+        <igx-icon fontSet="material">bluetooth</igx-icon>
+      </span>
+    </ng-template>
+  </igx-nav-drawer>
+
+  <main igxFlex>
+    <!-- <button (click)="drawer.toggle()"> Menu </button> -->
+    <span igxButton="icon" igxToggleAction="navigation">
+      <igx-icon fontSet="material">menu</igx-icon>
+    </span>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+</body>

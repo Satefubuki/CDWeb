@@ -1,0 +1,57 @@
+<div class="row p-5">
+    <div class="col">
+        <div class="card" style="width: 85vw;">
+            <div class="card-body">
+
+                <div class="row pb-3">
+                    <div class="col">
+                        <span>Danh sách thao tác: </span>
+                        
+                <div class="card-body">
+                    <ngx-datatable 
+                    class="material" 
+                    [rows]="logs" 
+                    [rowHeight]="70" 
+                    [columnMode]="'force'" 
+                    [sortType]="'multi'" 
+                    [headerHeight]="50" 
+                    [footerHeight]="50" 
+                    [externalPaging]="true"
+                    [count]="paging.totalItems"
+                    [offset]="paging.page"
+                    [limit]="paging.pageLimit"
+                    (page)="loadLog($event)"   
+                    >
+                    <ngx-datatable-column name="Thời gian">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <span>{{ row.createdTime |  date:'MM/dd/yyyy hh:mm:ss'}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                    <ngx-datatable-column name="Người thực hiện">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.user }}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="IP">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.ip}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Mức độ">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.level}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="mô tả">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.description}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+</div>

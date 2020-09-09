@@ -1,0 +1,299 @@
+<div class="row p-5">
+    <div class="col">
+        <div class="card" style="width: 85vw;">
+            <div class="card-body">
+
+                <div class="row pb-3">
+                    <div class="col">
+                        <span>Danh sách sản phẩm: </span>
+                        <!-- <select [(ngModel)]="customerTypeId" (change)="loadCustomer()">
+                    <option value="0"> --- All ---</option>
+                    <option *ngFor="let aCUT of customerTypes" value="{{aCUT.id}}">
+                        {{aCUT.name}}
+                    </option>
+                </select> -->
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" (click)="openAdd()" class="btn btn-success"><i class="fa fa-plus"></i>
+                            Add</button>
+                    </div>
+                </div>
+                <!-- <div>
+
+                    <table id="table" class="table table-striped text-center border border-secondary rounded-top"
+                        style="width:100%;">
+                        <thead class="bg-secondary \">
+                            <tr>
+                                <th scope="col">Ảnh</th>
+                                <th scope="col">Ảnh</th>
+                                <th scope="col">Ảnh</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Loại</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Hãng</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of page?.content">
+                                <td class="align-middle"><img src="http://localhost:8081/files/{{product.mainImg}}"
+                                        alt=""></td>
+                                <td class="align-middle"><img src="http://localhost:8081/files/{{product.subImg}}"
+                                        alt=""></td>
+                                <td class="align-middle"><img src="http://localhost:8081/files/{{product.subImg2}}"
+                                        alt=""></td>
+                                <td class="align-middle">{{product.name}}</td>
+                                <td class="align-middle">{{product.type.typeName}}</td>
+                                <td class="align-middle">{{product.price}}</td>
+                                <td class="align-middle">{{product.brand.brand}}</td>
+                                <td class="align-middle"></td>
+                                <td class="align-middle">
+                                    <div class="row">
+                                        <div class="p-1">
+                                            <button type="button" (click)="openEdit(product.id)"
+                                                class="btn btn-primary"><i class="fa fa-edit"></i>
+                                            </button>
+                                        </div>
+                                        <div class="p-1">
+                                            <button type="button" (click)="delete(product.id)" class="btn btn-danger"><i
+                                                    class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </td>
+
+                        </tbody>
+                    </table>
+                </div>
+                <app-pagination [currentPage]="page"></app-pagination> -->
+                <div class="card-body">
+                    <ngx-datatable 
+                    class="material" 
+                    [rows]="products" 
+                    [rowHeight]="70" 
+                    [columnMode]="'force'" 
+                    [sortType]="'multi'" 
+                    [headerHeight]="50" 
+                    [footerHeight]="50" 
+                    [externalPaging]="true"
+                    [count]="paging.totalItems"
+                    [offset]="paging.page"
+                    [limit]="paging.pageLimit"
+                    (page)="loadProduct($event)"   
+                    >
+                    <ngx-datatable-column name="Tên">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <span>{{ row.name}}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                    <ngx-datatable-column name="Loại">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.type.typeName}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Hãng">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.brand.brand}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Giá">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.price}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Giảm">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                          <span>{{ row.sale}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Ảnh" [width]="80">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <img src="http://localhost:8081/files/{{row.mainImg}}">
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Ảnh" [width]="80">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                           <img src="http://localhost:8081/files/{{row.subImg}}">
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Ảnh" [width]="80">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <img src="http://localhost:8081/files/{{row.subImg2}}">
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Thao tác" [width]="80">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <i (click)="openEdit(row.id)" class="fa fa-edit text-primary mr-1 pointer"></i>
+                            <i (click)="delete(row.id)" class="fa fa-trash text-danger pointer"></i>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- -------------------------------------------------------- -->
+<div bsModal #addModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-child-name" class="modal-title"> Sản phẩm</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="saveForm" novalidate (ngSubmit)="save()" enctype="multipart/form-data">
+                    <div class="form-group ">
+                        <label for="pwd">Tên sản phẩm</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{'is-invalid': saveForm.controls['name'].touched && saveForm.controls['name'].errors, 'is-valid': saveForm.controls['name'].touched && !saveForm.controls['name'].errors}"
+                            [(ngModel)]="product.name" formControlName="name">
+                        <div *ngIf="saveForm.controls['name'].touched && (saveForm.controls['name'].hasError('minlength') || saveForm.controls['name'].hasError('maxlength'))"
+                            class="invalid-feedback">
+                            Tên không hợp lệ
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label for="pwd">Giá</label>
+                            <input type="number" class="form-control"
+                                [ngClass]="{'is-invalid': saveForm.controls['price'].touched && saveForm.controls['price'].errors, 'is-valid': saveForm.controls['price'].touched && !saveForm.controls['price'].errors}"
+                                [(ngModel)]="product.price" formControlName="price">
+                            <div *ngIf="saveForm.controls['price'].touched && saveForm.controls['price'].hasError('required')"
+                                class="invalid-feedback">
+                                Giá không hợp lệ
+                            </div>
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="pwd">Màu sắc</label>                           
+                            <select [(ngModel)]="product.color"
+                                [ngClass]="{'is-invalid': saveForm.controls['color'].touched && saveForm.controls['color'].errors, 'is-valid': saveForm.controls['color'].touched && !saveForm.controls['type'].errors}"
+                                class="form-control" formControlName="color">
+                                <option *ngFor="let c of colors" value="{{c.value}}">
+                                    {{c.name}}
+                                </option>
+                            </select>
+                            <div *ngIf="saveForm.controls['color'].touched && saveForm.controls['color'].hasError('required')"
+                            class="invalid-feedback">
+                            Màu không hợp lệ
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label for="pwd">Số lượng</label>
+                            <input type="number" class="form-control"
+                                [ngClass]="{'is-invalid': saveForm.controls['stock'].touched && saveForm.controls['stock'].errors, 'is-valid': saveForm.controls['stock'].touched && !saveForm.controls['stock'].errors}"
+                                [(ngModel)]="product.stock" formControlName="stock">
+                            <div *ngIf="saveForm.controls['stock'].touched && saveForm.controls['stock'].hasError('required')"
+                                class="invalid-feedback">
+                                Số lượng không hợp lệ
+                            </div>
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="pwd">Giảm giá</label>
+                            <input type="number" class="form-control"
+                                [ngClass]="{'is-invalid': saveForm.controls['sale'].touched && saveForm.controls['sale'].errors, 'is-valid': saveForm.controls['sale'].touched && !saveForm.controls['sale'].errors}"
+                                [(ngModel)]="product.sale" formControlName="sale">
+                            <div *ngIf="saveForm.controls['sale'].touched && saveForm.controls['sale'].hasError('required')"
+                                class="invalid-feedback">
+                                Giảm không hợp lệ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label for="pwd">Loại</label>
+                            <select [(ngModel)]="product.type.id"
+                                [ngClass]="{'is-invalid': saveForm.controls['type'].touched && saveForm.controls['type'].errors, 'is-valid': saveForm.controls['type'].touched && !saveForm.controls['type'].errors}"
+                                class="form-control" formControlName="type">
+                                <option *ngFor="let t of type" value="{{t.id}}">
+                                    {{t.typeName}}
+                                </option>
+                            </select>
+                            <div *ngIf="saveForm.controls['type'].touched && saveForm.controls['type'].hasError('required')"
+                                class="invalid-feedback">
+                                Xin chọn loại
+                            </div>
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="pwd">Nhãn hiệu</label>
+                            <select [(ngModel)]="product.brand.id"
+                                [ngClass]="{'is-invalid': saveForm.controls['brand'].touched && saveForm.controls['brand'].errors, 'is-valid': saveForm.controls['brand'].touched && !saveForm.controls['brand'].errors}"
+                                class="form-control" formControlName="brand">
+                                <option *ngFor="let b of brand" value="{{b.id}}">
+                                    {{b.brand}}
+                                </option>
+                            </select>
+                            <div *ngIf="saveForm.controls['brand'].touched && saveForm.controls['brand'].hasError('required')"
+                                class="invalid-feedback">
+                                Xin chọn nhãn hiệu
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row form-group ">
+                        <div class="col-4">
+                            <label for="pwd">Công việc</label>
+                            <select [(ngModel)]="job" class="form-control">
+                              <option *ngFor="let j of job" value="{{j.Job_ID}}">
+                                  {{j.Job_Name}}
+                              </option>
+                          </select> 
+                        </div>
+                    </div> -->
+
+                    <div class="form-group">
+
+                        <label for="pwd">Ảnh chính</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" accept='image/*'
+                                (change)="selectMain($event)" formControlName="main">
+                            <label class="custom-file-label" for="customFile">{{mainName}}</label>
+                        </div>
+                       
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Ảnh phụ 1</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" accept='image/*'
+                                (change)="selectSub($event)" formControlName="sub">
+                            <label class="custom-file-label" for="customFile">{{subName}}</label>
+                        </div>
+                        <!-- <div class="image-upload">
+                                <label for="file-sub-input">
+                                    <img ngI src="../../../assets/default.jpg"
+                                        style="border-radius: 8px; border: 1px solid rgba(81, 130, 202, 0.658);padding: 5px" />
+                                </label>
+
+                                <input id="file-sub-input" type="file" (change)="selectSub($event)" formControlName="sub" />
+                            </div> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Ảnh phụ 2</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" accept='image/*'
+                                (change)="selectSub2($event)" formControlName="sub1">
+                            <label class="custom-file-label" for="customFile">{{sub1Name}}</label>
+                        </div>
+                        
+                    </div>
+
+
+                    <div class="form-group col text-center">
+                        <button type="button" class="btn btn-outline-dark center" (click)="save()"
+                            (click)="hideModal()">LƯU</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ------------------------------------------------ -->

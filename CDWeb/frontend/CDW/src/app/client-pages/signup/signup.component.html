@@ -1,0 +1,41 @@
+<div class="wrapper fadeInDown zero-raduis">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+        <h2 class="my-5">Sign Up</h2>
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="signupForm" novalidate (ngSubmit)="register()">
+        <input type="email" id="email" class="fadeIn second zero-raduis" [ngClass]="{'is-invalid': signupForm.controls['username'].touched && signupForm.controls['username'].errors, 'is-valid': signupForm.controls['username'].touched && !signupForm.controls['username'].errors}" [(ngModel)]="username" formControlName="username" placeholder="username" (blur)="checkuser($event)">
+        <div *ngIf="signupForm.controls['username'].touched && signupForm.controls['username'].hasError('required')" class="text-danger">
+          Username không được bỏ trống
+        </div>
+        <div *ngIf="isExist" class="text-danger">
+          Tên Đăng nhập đã tồn tại
+       </div>
+        <input type="password" id="password" class="fadeIn third zero-raduis" [ngClass]="{'is-invalid': signupForm.controls['password'].touched && signupForm.controls['password'].errors, 'is-valid': signupForm.controls['password'].touched && !signupForm.controls['password'].errors}" [(ngModel)]="password" formControlName="password" placeholder="Password">
+        <div *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].hasError('required')" class="text-danger">
+          Password không được bỏ trống
+        </div>
+        <input type="password" id="cpassword" class="fadeIn third zero-raduis" [ngClass]="{'is-invalid': signupForm.controls['cpassword'].touched && signupForm.controls['cpassword'].errors, 'is-valid': signupForm.controls['cpassword'].touched && !signupForm.controls['cpassword'].errors}" [(ngModel)]="cpassword"  formControlName="cpassword" placeholder="Confirm Password" (blur)="checkpass($event)">
+        <div *ngIf="signupForm.controls['cpassword'].touched && signupForm.controls['cpassword'].hasError('required')" class="text-danger">
+          Password không được bỏ trống
+        </div>
+        <div *ngIf="!isCorrect" class="text-danger">
+          Nhập lại mật khẩu không đúng
+       </div>
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+        <input type="submit" class="fadeIn fourth zero-raduis" value="Register" [disabled]="!signupForm.valid" >
+        <h2>Already have a account ?</h2>
+        <input type="button" class="fadeIn fourth zero-raduis pc" [routerLink]="[ '/login']" value="Login">
+      </form>
+      
+
+    </div>
+</div>

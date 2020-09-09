@@ -1,0 +1,34 @@
+<div class="wrapper fadeInDown zero-raduis">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+        <h2 class="my-5">Login</h2>
+      </div>
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" novalidate (ngSubmit)="login()">
+        <input type="text" class="fadeIn second zero-raduis" [ngClass]="{'is-invalid': loginForm.controls['username'].touched && loginForm.controls['username'].errors, 'is-valid': loginForm.controls['username'].touched && !loginForm.controls['username'].errors}" [(ngModel)]="username" placeholder="Username" formControlName="username">
+        <div *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('required')" class="text-danger">
+         Username không được bỏ trống
+      </div>
+        <input type="password" class="fadeIn third zero-raduis" [ngClass]="{'is-invalid': loginForm.controls['password'].touched && loginForm.controls['password'].errors, 'is-valid': loginForm.controls['password'].touched && !loginForm.controls['password'].errors}" [(ngModel)]="password" placeholder="Password" formControlName="password">
+        <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].hasError('required')" class="text-danger">
+          Password không được bỏ trống
+       </div>
+       <div *ngIf="isfail" class="text-danger">
+        Tên Đăng nhập hoặc mật khẩu không đúng
+     </div>
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+        <input type="submit" class="fadeIn fourth zero-raduis" value="login" [disabled]="!loginForm.valid">
+        <h2>You don't have a account ?</h2>
+        <input type="button" class="fadeIn fourth zero-raduis pc" [routerLink]="[ '/register']" value="register">
+      </form>
+      
+
+    </div>
+</div>

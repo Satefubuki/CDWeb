@@ -1,0 +1,9 @@
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css");
+
+img{
+    width: 70px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+}
